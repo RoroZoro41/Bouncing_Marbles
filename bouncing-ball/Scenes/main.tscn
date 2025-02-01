@@ -1,25 +1,58 @@
-[gd_scene load_steps=5 format=3 uid="uid://bofj65ab8kula"]
+[gd_scene load_steps=9 format=3 uid="uid://bofj65ab8kula"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_yxmpq"]
-[ext_resource type="Shader" path="res://Shaders/main.gdshader" id="2_fh6vq"]
+[ext_resource type="Shader" path="res://Shaders/fire.gdshader" id="2_fh6vq"]
+[ext_resource type="Shader" path="res://Shaders/Test.gdshader" id="3_x2apc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_btld2"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_67fxs"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yd68m"]
+seamless = true
+noise = SubResource("FastNoiseLite_67fxs")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gm42s"]
 shader = ExtResource("2_fh6vq")
-shader_parameter/test = null
+shader_parameter/flame_color = Color(0.943792, 0.356554, 0.169465, 1)
+shader_parameter/horizontal_scroll_speed = 0.0
+shader_parameter/vertical_scroll_speed = 0.5
+shader_parameter/UV_offset = -0.5
+shader_parameter/noise = SubResource("NoiseTexture2D_yd68m")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ysrvg"]
+shader = ExtResource("3_x2apc")
 
 [node name="main" type="Node2D"]
 material = SubResource("ShaderMaterial_btld2")
 script = ExtResource("1_yxmpq")
 
 [node name="Control" type="CanvasLayer" parent="."]
+layer = -1
 
 [node name="ColorRect" type="ColorRect" parent="Control"]
+visible = false
+z_index = -1
 material = SubResource("ShaderMaterial_gm42s")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -107.0
+offset_right = -107.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.0184099, 0.043205, 0.144281, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Control"]
+z_index = -1
+material = SubResource("ShaderMaterial_ysrvg")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

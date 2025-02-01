@@ -24,7 +24,6 @@ func _ready() -> void:
 	area_collision_shape.shape = collision_shape.shape
 	mass = circle_collision.radius/10
 	
-	
 	apply_force(
 		Vector2(
 			randf_range(-push_force,push_force),
@@ -33,12 +32,18 @@ func _ready() -> void:
 		)
 
 func _physics_process(_delta: float) -> void:
-
 	#$Label.text = str(position.round())
-	if dragging_ball:
-		if Input.is_action_just_pressed("Mouse_Press"):
-			queue_free()
-	#easy but inneficient way to make the balls bounce off of edges of screen
+	screen_bounce()
+	
+
+	drag()
+
+func _draw() -> void:
+	draw_circle(Vector2.ZERO , collision_shape.shape.radius , color/2)
+	draw_circle(Vector2.ZERO , collision_shape.shape.radius/1.2 , color)
+
+func screen_bounce():
+#easy but inneficient way to make the balls bounce off of edges of screen
 	var window_edge = get_viewport_rect().size
 	var gpos = global_position
 	var radius = collision_shape.shape.radius
@@ -68,20 +73,18 @@ func _physics_process(_delta: float) -> void:
 	# moves the ball to inisde the window if it gets too far
 	if gpos.x < 0:
 		gpos = 10
-	
-# code for dragging the ball
+
+func drag():
+	#delete currently dragged ball
+	if dragging_ball:
+		if Input.is_action_just_pressed("Mouse_Press"):
+			queue_free()
+	# code for dragging the ball
 	if Input.is_action_just_released("Right Mouse Button"):
 		dragging_ball = false
 	if hovering_on_ball:
 		if Input.is_action_just_pressed("Right Mouse Button"):
 			dragging_ball = true
-	drag()
-
-func _draw() -> void:
-	draw_circle(Vector2.ZERO , collision_shape.shape.radius , color/2)
-	draw_circle(Vector2.ZERO , collision_shape.shape.radius/1.2 , color)
-
-func drag():
 	if dragging_ball:
 		var mouse_pos = get_global_mouse_position()
 		var direction = (mouse_pos - global_position).normalized()
@@ -112,7 +115,6 @@ func rand_color_reaply():
 	var new_b = clamp(color.b + randf_range(-variation, variation), 0.0, 1.0)    
 	color = Color(new_r, new_g, new_b)
 	queue_redraw()
-
 
 func _on_body_entered(body: Node) -> void:
 	play_rand_ball_sound()
