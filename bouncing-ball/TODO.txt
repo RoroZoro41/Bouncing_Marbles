@@ -1,5 +1,18 @@
 Add shader background
 
-add sound effect (marble sound) for ball clanging (and wall touching)
+✅ add sound effect (marble sound) for ball clanging (and wall touching)
 
-teleport the balls to inside the window if they get pushed out
+✅ teleport the balls to inside the window if they get pushed out
+
+Add moving shader as background
+
+BONUS:
+
+add an area around the right clicked mouse, and if there is a ball inside it, 
+dragging = true
+make sure that only one ball is selectable
+
+Make the size of the ball be determined by how much the player moves the mouse
+while holding left click
+
+✅ drag + click to delete a ball?

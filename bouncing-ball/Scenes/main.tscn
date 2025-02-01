@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bofj65ab8kula"]
+
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_yxmpq"]
+[ext_resource type="Shader" path="res://Shaders/main.gdshader" id="2_fh6vq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_btld2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gm42s"]
+shader = ExtResource("2_fh6vq")
+shader_parameter/test = null
+
+[node name="main" type="Node2D"]
+material = SubResource("ShaderMaterial_btld2")
+script = ExtResource("1_yxmpq")
+
+[node name="Control" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+material = SubResource("ShaderMaterial_gm42s")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0184099, 0.043205, 0.144281, 1)
