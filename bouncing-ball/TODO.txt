@@ -6,6 +6,8 @@ Add shader background
 
 Add moving shader as background
 
+make the balls teleport to exactly the boundaries when outside of them
+
 BONUS:
 
 add an area around the right clicked mouse, and if there is a ball inside it, 
