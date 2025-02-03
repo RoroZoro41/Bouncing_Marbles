@@ -1,13 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://by8k08gjkiqhb"]
 
-[ext_resource type="Shader" path="res://Shaders/ball_shader.gdshader" id="1_8lbdn"]
+[ext_resource type="Shader" path="res://Shaders/test.gdshader" id="1_kiwtq"]
 [ext_resource type="Texture2D" uid="uid://dt8qag4rwaq5m" path="res://Stuff/icon.svg" id="2_v3fji"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f80u4"]
-shader = ExtResource("1_8lbdn")
-shader_parameter/marble_color = Color(1, 1, 1, 0.8)
-shader_parameter/refraction_strength = 0.05
-shader_parameter/refraction_distortion = Vector2(0.02, 0.02)
+shader = ExtResource("1_kiwtq")
+shader_parameter/color_picker = Color(1, 0.351148, 0.912111, 1)
 
 [node name="Test" type="Sprite2D"]
 material = SubResource("ShaderMaterial_f80u4")
