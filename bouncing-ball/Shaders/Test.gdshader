@@ -1,9 +1,20 @@
 shader_type canvas_item;
-
-void fragment()
+//#363d52
+//54 61 82
+//0.212 0.239 0.322
+uniform vec4 color_picker: source_color;
+void fragment() 
 {
-	vec2 xy = vec2(abs(UV.x-0.5), abs(UV.y-0.5));
-	COLOR.rg = xy;
-	float grayscale = length(xy) * 2.0; // Scale to reach full range
-	COLOR =  vec4(vec3(grayscale), 1.0);
+	vec4 image = texture(TEXTURE, UV);
+	vec4 original_image = image;
+	image.a *= step(0.4, image.b);
+	image.a *= step(image.r, 0.68);
+	image.rgb = vec3(1.0);
+		//image.b = (1.0);
+	//image *= color_picker;
+	vec4 image_mask = vec4(1.0) - image;
+	image_mask.rgb = original_image.rgb;
+	image.rgb = image_mask.rgb * image.rgb;
+	COLOR = image; 
+	//COLOR.rgb *= vec3(1.0,1.0,0.0);
 }
