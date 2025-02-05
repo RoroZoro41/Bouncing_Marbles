@@ -5,7 +5,6 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f80u4"]
 shader = ExtResource("1_kiwtq")
-shader_parameter/color_picker = Color(1, 0.351148, 0.912111, 1)
 
 [node name="Test" type="Sprite2D"]
 material = SubResource("ShaderMaterial_f80u4")

@@ -7,6 +7,9 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lijcr"]
 shader = ExtResource("1_2rtgl")
 shader_parameter/marble_color = Color(0, 1, 1, 0.415686)
+shader_parameter/cirlce_size = 1.0
+shader_parameter/scroll_speed = null
+shader_parameter/distortion_strength = 0.2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e02uu"]
 radius = 64.4981

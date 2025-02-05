@@ -1,5 +1,6 @@
 extends RigidBody2D
 
+@onready var sprite: Sprite2D = $Sprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var area_collision_shape: CollisionShape2D = $Area2D/CollisionShape2D2
 @onready var clang_1: AudioStreamPlayer2D = $"Sounds/Clang 1"
@@ -20,27 +21,25 @@ func _ready() -> void:
 	color = Color(randf(),randf(),randf())
 	var circle_collision:CircleShape2D = CircleShape2D.new()
 	circle_collision.radius = randf_range(min_size, max_size)
+	#circle_collision.radius = max_size
 	collision_shape.shape = circle_collision
 	area_collision_shape.shape = collision_shape.shape
-	mass = circle_collision.radius/10
+	mass = circle_collision.radius/min_size
 	
-	apply_force(
-		Vector2(
-			randf_range(-push_force,push_force),
-			randf_range(-push_force,push_force)
-			)
-		)
+	
+	if sprite.material:
+		sprite.material.set("shader_parameter/marble_color", color)
+		#the 10.0 is because the sprite circle has a diameter of 10 pixels
+		sprite.material.set("shader_parameter/cirlce_size", 
+							collision_shape.shape.radius/10.0);
+	
+	apply_force(Vector2(
+					randf_range(-push_force,push_force),
+					randf_range(-push_force,push_force)))
 
 func _physics_process(_delta: float) -> void:
-	#$Label.text = str(position.round())
 	screen_bounce()
-	
-
 	drag()
-
-func _draw() -> void:
-	draw_circle(Vector2.ZERO , collision_shape.shape.radius , color/2)
-	draw_circle(Vector2.ZERO , collision_shape.shape.radius/1.2 , color)
 
 func screen_bounce():
 #easy but inneficient way to make the balls bounce off of edges of screen
@@ -101,12 +100,6 @@ func play_rand_ball_sound():
 	
 	sounds.get_child(rng).play()
 
-func _on_area_2d_mouse_entered() -> void:
-	hovering_on_ball = true
-
-func _on_area_2d_mouse_exited() -> void:
-	hovering_on_ball = false
-
 func rand_color_reaply():
 #redraws the color, but similarly to how it was before
 	var variation = 0.5  # Adjust how much the color changes (smaller = more similar)
@@ -116,6 +109,12 @@ func rand_color_reaply():
 	color = Color(new_r, new_g, new_b)
 	queue_redraw()
 
-func _on_body_entered(body: Node) -> void:
+func _on_area_2d_mouse_entered() -> void:
+	hovering_on_ball = true
+
+func _on_area_2d_mouse_exited() -> void:
+	hovering_on_ball = false
+
+func _on_body_entered(_body: Node) -> void:
 	play_rand_ball_sound()
 	rand_color_reaply()
