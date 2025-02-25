@@ -28,7 +28,7 @@ angular_damp = 100.0
 script = ExtResource("2_ec48d")
 color = Color(0.866684, 0.520102, 0.784461, 1)
 metadata/_edit_horizontal_guides_ = [-10.0]
-metadata/_edit_vertical_guides_ = [10.0]
+metadata/_edit_vertical_guides_ = [10.1468]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

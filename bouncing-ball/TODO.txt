@@ -8,6 +8,7 @@
 
 ✅ add ball shader
 
+❗❗❗❗❗ DOING THIS ❗❗❗❗❗ I'm using line 2d. LOOK AT CHATGPT AND UNDERSTAND
 Make the size of the ball be determined by how much the player moves the mouse
 while holding left click
 

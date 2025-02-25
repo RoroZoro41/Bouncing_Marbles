@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmqhkn768v107"]
+
+[ext_resource type="Script" path="res://Scripts/ball_outline.gd" id="1_nmk0v"]
+
+[node name="Line2D" type="Line2D"]
+closed = true
+script = ExtResource("1_nmk0v")
+segments = 5

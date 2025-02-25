@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bofj65ab8kula"]
+[gd_scene load_steps=24 format=3 uid="uid://bofj65ab8kula"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_yxmpq"]
 [ext_resource type="Shader" path="res://Shaders/colored noise shift.gdshader" id="2_4pcfh"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://fy81lgfuhatb" path="res://Scenes/ball_with_sprite.tscn" id="6_5orfh"]
 [ext_resource type="Texture2D" uid="uid://dt8qag4rwaq5m" path="res://Stuff/icon.svg" id="7_qn0rp"]
 [ext_resource type="Shader" path="res://Shaders/bad wiggle_shader.gdshader" id="8_4x5ve"]
+[ext_resource type="PackedScene" uid="uid://dmqhkn768v107" path="res://Scenes/ball_outline.tscn" id="9_g6x16"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_btld2"]
 
@@ -79,7 +80,7 @@ material = SubResource("ShaderMaterial_btld2")
 script = ExtResource("1_yxmpq")
 
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(521, 240)
+position = Vector2(338, 286)
 texture = ExtResource("7_qn0rp")
 
 [node name="Ball with Sprite" parent="." instance=ExtResource("6_5orfh")]
@@ -149,3 +150,6 @@ offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="ball outline" parent="." instance=ExtResource("9_g6x16")]
+position = Vector2(253, 119)
