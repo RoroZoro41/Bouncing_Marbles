@@ -6,6 +6,11 @@ extends RigidBody2D
 @onready var clang_1: AudioStreamPlayer2D = $"Sounds/Clang 1"
 @onready var clang_2: AudioStreamPlayer2D = $"Sounds/Clang 2"
 
+#shaders
+const BLUE_RED_SCREEN_BALL_SHADER = preload("res://Shaders/Ball Shaders/blue red screen ball shader.gdshader")
+const GREEN_BLUE_SCREEN_BALL_SHADER = preload("res://Shaders/Ball Shaders/green blue screen ball shader.gdshader")
+const GREEN_RED_SCREEN_BALL_SHADER = preload("res://Shaders/Ball Shaders/green red screen ball shader.gdshader")
+
 @export var color: Color = Color(1,1,1)
 @export var push_force: float = 10000
 @export var min_size: float = 10
@@ -26,12 +31,17 @@ func _ready() -> void:
 	area_collision_shape.shape = collision_shape.shape
 	mass = circle_collision.radius/min_size
 	
-	
+	var shaders = [
+		BLUE_RED_SCREEN_BALL_SHADER,
+		GREEN_BLUE_SCREEN_BALL_SHADER,
+		GREEN_RED_SCREEN_BALL_SHADER
+	]
 	if sprite.material:
 		sprite.material.set("shader_parameter/marble_color", color)
 		#the 10.0 is because the sprite circle has a diameter of 10 pixels
 		sprite.material.set("shader_parameter/cirlce_size", 
 							collision_shape.shape.radius/10.0);
+		sprite.material.shader = shaders.pick_random()
 	
 	apply_force(Vector2(
 					randf_range(-push_force,push_force),
@@ -55,7 +65,7 @@ func screen_bounce():
 		linear_velocity.x *= -1  # Reverse X velocity
 		if not dragging_ball:
 			play_rand_ball_sound()
-			rand_color_reaply()
+	
 		if gpos.x - radius <= 0:
 			position.x += out_of_bounds_return_offset * out_of_bounds_return_dragging_multiplier
 		else:
@@ -64,7 +74,7 @@ func screen_bounce():
 		linear_velocity.y *= -1  # Reverse X velocity
 		if not dragging_ball:
 			play_rand_ball_sound()
-			rand_color_reaply()
+			
 		if gpos.y - radius <= 0:
 			position.y += out_of_bounds_return_offset * out_of_bounds_return_dragging_multiplier
 		else:
@@ -100,15 +110,6 @@ func play_rand_ball_sound():
 	
 	sounds.get_child(rng).play()
 
-func rand_color_reaply():
-#redraws the color, but similarly to how it was before
-	var variation = 0.5  # Adjust how much the color changes (smaller = more similar)
-	var new_r = clamp(color.r + randf_range(-variation, variation), 0.0, 1.0)
-	var new_g = clamp(color.g + randf_range(-variation, variation), 0.0, 1.0)
-	var new_b = clamp(color.b + randf_range(-variation, variation), 0.0, 1.0)    
-	color = Color(new_r, new_g, new_b)
-	queue_redraw()
-
 func _on_area_2d_mouse_entered() -> void:
 	hovering_on_ball = true
 
@@ -117,4 +118,3 @@ func _on_area_2d_mouse_exited() -> void:
 
 func _on_body_entered(_body: Node) -> void:
 	play_rand_ball_sound()
-	rand_color_reaply()
