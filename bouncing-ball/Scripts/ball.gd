@@ -52,37 +52,22 @@ func _physics_process(_delta: float) -> void:
 	drag()
 
 func screen_bounce():
-#easy but inneficient way to make the balls bounce off of edges of screen
+# when the ball reaches either end of screen, flip their velocity, and play sound
+# Also, ball won't ever leave the window thanks to clamping the position
 	var window_edge = get_viewport_rect().size
 	var gpos = global_position
 	var radius = collision_shape.shape.radius
-	var out_of_bounds_return_offset = 1
-	var out_of_bounds_return_dragging_multiplier = 10
-	if dragging_ball:
-		out_of_bounds_return_dragging_multiplier = 10
-	else: out_of_bounds_return_dragging_multiplier = 1
+	position.x = clamp(gpos.x,0+radius,window_edge.x-radius)
+	position.y = clamp(gpos.y,0+radius,window_edge.y-radius)
 	if gpos.x - radius <= 0 or gpos.x + radius >= window_edge.x:
 		linear_velocity.x *= -1  # Reverse X velocity
 		if not dragging_ball:
 			play_rand_ball_sound()
-	
-		if gpos.x - radius <= 0:
-			position.x += out_of_bounds_return_offset * out_of_bounds_return_dragging_multiplier
-		else:
-			position.x -= out_of_bounds_return_offset * out_of_bounds_return_dragging_multiplier
 	if gpos.y - radius <= 0 or gpos.y + radius >= window_edge.y:
-		linear_velocity.y *= -1  # Reverse X velocity
+		linear_velocity.y *= -1  # Reverse Y velocity
 		if not dragging_ball:
 			play_rand_ball_sound()
-			
-		if gpos.y - radius <= 0:
-			position.y += out_of_bounds_return_offset * out_of_bounds_return_dragging_multiplier
-		else:
-			position.y -= out_of_bounds_return_offset * out_of_bounds_return_dragging_multiplier
-	# moves the ball to inisde the window if it gets too far
-	if gpos.x < 0:
-		gpos = 10
-
+	
 func drag():
 	#delete currently dragged ball
 	if dragging_ball:
