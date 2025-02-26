@@ -8,11 +8,25 @@
 
 ✅ add ball shader
 
-❗❗❗❗❗ DOING THIS ❗❗❗❗❗ I'm using line 2d. LOOK AT CHATGPT AND UNDERSTAND
-Make the size of the ball be determined by how much the player moves the mouse
-while holding left click
+✅ Make the size of the ball be determined by how much the player drags mouse
+
+✅ make it so that when a ball is created, it doesn't spaz out when in a wall
+
+✅ make it so that the balls can't be *too* big
+
+✅ make it so that you gotta drag alot to make a ball 
+(like double the drag for half the ball)
+
+❗❗❗ CURRENTLY DOING ❗❗❗
+make it so the noise only happens the moment the balls collide, and never during
+or give ball bounciness so that it doesn't span noises when stuck
 
 fix bug that makes the sound play over and over again annoyingly
+Set a max limit to the nb of sfx playing at the same time 
+(not necessary if balls stop being fucking stupid)
+
+Make a teeeeny reset button at the top middle
+	remove the 
 
 BONUS:
 

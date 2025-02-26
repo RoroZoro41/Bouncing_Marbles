@@ -13,7 +13,7 @@ void fragment() {
 	vec2 movement_factor = movement_direction * movement_speed * TIME;
 	float noise_value = texture(NOISE_TEXTURE, uv*uv_scaling + movement_factor).r - 0.5;
 	uv += noise_value * SCREEN_PIXEL_SIZE * strength;
-	
+
 	COLOR = texture(SCREEN_TEXTURE, uv);
 	//COLOR.gb = uv;
 }

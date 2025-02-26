@@ -15,21 +15,25 @@ const GREEN_RED_SCREEN_BALL_SHADER = preload("res://Shaders/Ball Shaders/green r
 @export var push_force: float = 10000
 @export var min_size: float = 10
 @export var max_size: float = 50
-#@export var sounds: Array[AudioStream] = []
+var ball_input_size: float = 10
 
-#var hover_on_ball:bool = false
 var hovering_on_ball:bool = false
 var dragging_ball:bool = false
 
 
 func _ready() -> void:
-	color = Color(randf(),randf(),randf())
+	#color = Color(randf(),randf(),randf())
 	var circle_collision:CircleShape2D = CircleShape2D.new()
-	circle_collision.radius = randf_range(min_size, max_size)
+	# if ball too small, do random instead
+	if (ball_input_size < 10):
+		#circle_collision.radius = randf_range(min_size, max_size)
+		return
+	else: circle_collision.radius = ball_input_size
 	#circle_collision.radius = max_size
 	collision_shape.shape = circle_collision
 	area_collision_shape.shape = collision_shape.shape
 	mass = circle_collision.radius/min_size
+	
 	
 	var shaders = [
 		BLUE_RED_SCREEN_BALL_SHADER,
@@ -37,15 +41,16 @@ func _ready() -> void:
 		GREEN_RED_SCREEN_BALL_SHADER
 	]
 	if sprite.material:
-		sprite.material.set("shader_parameter/marble_color", color)
+		#sprite.material.set("shader_parameter/marble_color", color)
 		#the 10.0 is because the sprite circle has a diameter of 10 pixels
 		sprite.material.set("shader_parameter/cirlce_size", 
 							collision_shape.shape.radius/10.0);
 		sprite.material.shader = shaders.pick_random()
-	
-	apply_force(Vector2(
-					randf_range(-push_force,push_force),
-					randf_range(-push_force,push_force)))
+
+	#applies random velocity upon creation
+	#apply_force(Vector2(
+					#randf_range(-push_force,push_force),
+					#randf_range(-push_force,push_force)))
 
 func _physics_process(_delta: float) -> void:
 	screen_bounce()
@@ -57,8 +62,8 @@ func screen_bounce():
 	var window_edge = get_viewport_rect().size
 	var gpos = global_position
 	var radius = collision_shape.shape.radius
-	position.x = clamp(gpos.x,0+radius,window_edge.x-radius)
-	position.y = clamp(gpos.y,0+radius,window_edge.y-radius)
+	position.x = clamp(gpos.x, radius ,window_edge.x-radius)
+	position.y = clamp(gpos.y, radius ,window_edge.y-radius)
 	if gpos.x - radius <= 0 or gpos.x + radius >= window_edge.x:
 		linear_velocity.x *= -1  # Reverse X velocity
 		if not dragging_ball:

@@ -1,9 +1,10 @@
+@tool
 extends Line2D
 
 @export var radius: float = 100.0
-@export var segments: int = 32  # More segments = smoother circle
+@export var segments: int = 6  # More segments = smoother circle
 
-func _ready():
+func _process(_delta: float) -> void:
 	var points = []
 	for i in range(segments + 1):  # +1 to close the circle
 		var angle = (i / float(segments)) * TAU  # TAU = 2 * PI

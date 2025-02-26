@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/ball_outline.gd" id="1_nmk0v"]
 
 [node name="Line2D" type="Line2D"]
+points = PackedVector2Array(100, 0, 30.9017, 95.1057, -80.9017, 58.7785, -80.9017, -58.7785, 30.9017, -95.1057, 100, -2.44921e-14, 100, 0)
 closed = true
 script = ExtResource("1_nmk0v")
 segments = 5
