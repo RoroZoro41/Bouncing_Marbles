@@ -17,23 +17,36 @@
 ✅ make it so that you gotta drag alot to make a ball 
 (like double the drag for half the ball)
 
-❗❗❗ CURRENTLY DOING ❗❗❗
-make it so the noise only happens the moment the balls collide, and never during
+✅ make it so the noise only happens the moment the balls collide, and never during
 or give ball bounciness so that it doesn't span noises when stuck
 
-fix bug that makes the sound play over and over again annoyingly
+✅ fix bug that makes the sound play over and over again annoyingly
 Set a max limit to the nb of sfx playing at the same time 
 (not necessary if balls stop being fucking stupid)
 
-Make a teeeeny reset button at the top middle
-	remove the 
+✅ Make a teeeeny reset button at the top middle
+
+Fix bugs:
+
+❌	ball spawns in top left corner when u press both buttons
+✅	if you hold left click, drag a tiny bit, the hold right click,
+		then the ball outline doesn't disapear
+❌	Pressing the reset button activates the circle outline, turn that off
 
 BONUS:
+
+❌ Touch support
+	1 finger for drag,and reset button
+	drag + touch with 2nd finger to delete
+	2 finger for create (not 1:1, make the ball smaller than the distance between fingiess)
+
+❗❗❗ CURRENTLY DOING ❗❗❗
+Fix the shaders being streched
 
 add an area around the right clicked mouse, and if there is a ball inside it, 
 dragging = true
 make sure that only one ball is selectable
 
-✅ drag + click to delete a ball?
-
 Allow warping, if ball touches right side, teleport to left
+
+✅ drag + click to delete a ball?

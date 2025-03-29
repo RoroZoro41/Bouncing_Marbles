@@ -2,8 +2,8 @@ shader_type canvas_item;
 uniform vec3 flame_color: source_color;
 uniform float horizontal_scroll_speed = 0.0;
 uniform float vertical_scroll_speed = 0.1;
-uniform float opacity:hint_range(0.0, 1.0, 0.05) = 0.2;
-uniform float UV_offset = 0;
+uniform float opacity:hint_range(0.0, 1.0, 0.05) = 0.15;
+uniform float UV_offset = -0.71;
 uniform sampler2D noise: hint_default_black, repeat_enable;
 
 

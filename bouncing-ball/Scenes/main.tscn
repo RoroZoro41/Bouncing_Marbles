@@ -1,29 +1,16 @@
-[gd_scene load_steps=23 format=3 uid="uid://bofj65ab8kula"]
+[gd_scene load_steps=26 format=3 uid="uid://bofj65ab8kula"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_yxmpq"]
 [ext_resource type="Shader" path="res://Shaders/colored noise shift.gdshader" id="2_4pcfh"]
 [ext_resource type="Shader" path="res://Shaders/background.gdshader" id="2_b8rvp"]
 [ext_resource type="Shader" path="res://Shaders/fire.gdshader" id="2_fh6vq"]
 [ext_resource type="Shader" path="res://Shaders/circle gradient.gdshader" id="3_x2apc"]
-[ext_resource type="Texture2D" uid="uid://dt8qag4rwaq5m" path="res://Stuff/icon.svg" id="7_qn0rp"]
-[ext_resource type="Shader" path="res://Shaders/bad wiggle_shader.gdshader" id="8_4x5ve"]
-[ext_resource type="PackedScene" uid="uid://dmqhkn768v107" path="res://Scenes/ball_outline.tscn" id="9_g6x16"]
+[ext_resource type="Texture2D" uid="uid://dmjxndqo0fuk4" path="res://Stuff/1100 sin título_20250325124648.png" id="7_qqp6r"]
+[ext_resource type="Texture2D" uid="uid://cosgris4prh4n" path="res://Stuff/1100 sin título_20250325125013.png" id="8_mitei"]
+[ext_resource type="Texture2D" uid="uid://bpsxjknuaww3s" path="res://Stuff/1100 sin título_20250325125145.png" id="9_ajncy"]
+[ext_resource type="PackedScene" uid="uid://elbr62fjcqfi" path="res://Scenes/Ball Sounds.tscn" id="9_m2u03"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_btld2"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_m1pip"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4ivn2"]
-seamless = true
-noise = SubResource("FastNoiseLite_m1pip")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mfiah"]
-shader = ExtResource("8_4x5ve")
-shader_parameter/strength = 2.7
-shader_parameter/uv_scaling = 1.0
-shader_parameter/movement_direction = Vector2(1, 0)
-shader_parameter/movement_speed = 0.1
-shader_parameter/NOISE_TEXTURE = SubResource("NoiseTexture2D_4ivn2")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_h78mh"]
 noise_type = 3
@@ -43,6 +30,7 @@ shader_parameter/noise = SubResource("NoiseTexture2D_vli6o")
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_67fxs"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yd68m"]
+width = 849
 seamless = true
 noise = SubResource("FastNoiseLite_67fxs")
 
@@ -50,7 +38,7 @@ noise = SubResource("FastNoiseLite_67fxs")
 shader = ExtResource("2_fh6vq")
 shader_parameter/flame_color = Color(0.943792, 0.356554, 0.169465, 1)
 shader_parameter/horizontal_scroll_speed = 0.0
-shader_parameter/vertical_scroll_speed = 0.1
+shader_parameter/vertical_scroll_speed = 0.04
 shader_parameter/opacity = 0.15
 shader_parameter/UV_offset = -0.71
 shader_parameter/noise = SubResource("NoiseTexture2D_yd68m")
@@ -74,23 +62,46 @@ shader_parameter/noise_alpha_swing_speed = 0.25
 shader_parameter/noise_color_mix_speed = 0.39
 shader_parameter/noise = SubResource("NoiseTexture2D_rr7qh")
 
+[sub_resource type="InputEventKey" id="InputEventKey_aa4q6"]
+device = -1
+keycode = 82
+unicode = 114
+
+[sub_resource type="InputEventKey" id="InputEventKey_fyfmf"]
+device = -1
+keycode = 32
+unicode = 32
+
+[sub_resource type="InputEventKey" id="InputEventKey_gh6x1"]
+device = -1
+keycode = 4194309
+
+[sub_resource type="Shortcut" id="Shortcut_il0pr"]
+events = [SubResource("InputEventKey_aa4q6"), SubResource("InputEventKey_fyfmf"), SubResource("InputEventKey_gh6x1")]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_skaoq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_qqp6r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mitei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ajncy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="main" type="Node2D"]
 material = SubResource("ShaderMaterial_btld2")
 script = ExtResource("1_yxmpq")
 
 [node name="Control" type="CanvasLayer" parent="."]
 layer = -1
-
-[node name="Wiggle" type="ColorRect" parent="Control"]
-z_index = -4
-y_sort_enabled = true
-material = SubResource("ShaderMaterial_mfiah")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
 
 [node name="Background" type="ColorRect" parent="Control"]
 z_index = -5
@@ -152,43 +163,44 @@ mouse_filter = 1
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.493
-anchor_right = 0.507
-offset_left = -10.52
-offset_right = 10.52
-offset_bottom = 20.0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -17.0
+offset_right = 17.0
+offset_bottom = 33.0
 grow_horizontal = 2
-grow_vertical = 2
 pivot_offset = Vector2(15, 0)
 mouse_filter = 1
 
-[node name="Reset Button" type="Button" parent="Control/Reset/Panel"]
+[node name="Reset Button" type="TextureButton" parent="Control/Reset/Panel"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
+anchors_preset = -1
+anchor_left = 0.01
+anchor_right = 1.016
 anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
+offset_left = -2.34
+offset_right = 767.292
+offset_bottom = 752.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.045, 0.045)
 focus_mode = 0
 mouse_filter = 1
+shortcut = SubResource("Shortcut_il0pr")
+texture_normal = ExtResource("7_qqp6r")
+texture_pressed = ExtResource("9_ajncy")
+texture_hover = ExtResource("8_mitei")
+ignore_texture_size = true
+stretch_mode = 3
+flip_h = true
 
-[node name="Icon" type="Sprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Control/Reset/Panel/Reset Button"]
 visible = false
-position = Vector2(338, 286)
-texture = ExtResource("7_qn0rp")
+position = Vector2(16.52, 16)
+scale = Vector2(0.0413412, 0.0413411)
+sprite_frames = SubResource("SpriteFrames_skaoq")
 
-[node name="ball outline" parent="." instance=ExtResource("9_g6x16")]
-visible = false
-position = Vector2(100, 102)
-points = PackedVector2Array(100, 0, 70.7107, 70.7107, 6.12303e-15, 100, -70.7107, 70.7107, -100, 1.22461e-14, -70.7107, -70.7107, -1.83691e-14, -100, 70.7107, -70.7107, 100, -2.44921e-14, 100, 0)
-width = 2.605
-segments = 8
+[node name="Sounds" parent="." instance=ExtResource("9_m2u03")]
 
 [connection signal="pressed" from="Control/Reset/Panel/Reset Button" to="." method="_on_button_pressed"]
