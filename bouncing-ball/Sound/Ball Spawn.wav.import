@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cl8do1m4y6rwb"
+path="res://.godot/imported/Ball Spawn.wav-2a2f2faef40730ac5de3108534096d55.sample"
+
+[deps]
+
+source_file="res://Sound/Ball Spawn.wav"
+dest_files=["res://.godot/imported/Ball Spawn.wav-2a2f2faef40730ac5de3108534096d55.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

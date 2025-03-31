@@ -41,7 +41,6 @@ func _ready() -> void:
 		return
 	else: circle_collision.radius = ball_input_size
 	
-	
 	collision_shape.shape = circle_collision
 	area_collision_shape.shape = collision_shape.shape
 	mass = circle_collision.radius/min_size
@@ -108,10 +107,12 @@ func drag():
 		linear_velocity = linear_velocity.lerp(Vector2.ZERO, drag_strength)
 
 func play_rand_ball_sound():
+#	\"res://Scenes/Ball Sounds.tscn\"
 	var sounds = BallSounds
 	
-	#picking a random sound from the sound node
-	var rng = randi_range(0,sounds.get_child_count()-1)
+	#picking a random sound from the sound node 
+		#(-2 instead of -1 to exclude the ball Spawn Sound)
+	var rng = randi_range(0,sounds.get_child_count()-2)
 	sounds.get_child(rng).pitch_scale = randf_range(0.95,1.4)
 	sounds.get_child(rng).play()
 

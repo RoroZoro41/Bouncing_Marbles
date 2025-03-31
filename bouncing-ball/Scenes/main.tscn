@@ -140,6 +140,7 @@ color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Colorful noise" type="ColorRect" parent="Control"]
+visible = false
 z_index = -5
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_drs5g")
@@ -150,7 +151,12 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Reset" type="Control" parent="Control"]
+[node name="Sounds" parent="." instance=ExtResource("9_m2u03")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="Reset" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -159,7 +165,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="Panel" type="Panel" parent="Control/Reset"]
+[node name="Panel" type="Panel" parent="CanvasLayer/Reset"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 1
 anchors_preset = -1
@@ -172,7 +178,7 @@ grow_horizontal = 2
 pivot_offset = Vector2(15, 0)
 mouse_filter = 1
 
-[node name="Reset Button" type="TextureButton" parent="Control/Reset/Panel"]
+[node name="Reset Button" type="TextureButton" parent="CanvasLayer/Reset/Panel"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = -1
@@ -195,12 +201,10 @@ ignore_texture_size = true
 stretch_mode = 3
 flip_h = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Control/Reset/Panel/Reset Button"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Reset/Panel/Reset Button"]
 visible = false
 position = Vector2(16.52, 16)
 scale = Vector2(0.0413412, 0.0413411)
 sprite_frames = SubResource("SpriteFrames_skaoq")
 
-[node name="Sounds" parent="." instance=ExtResource("9_m2u03")]
-
-[connection signal="pressed" from="Control/Reset/Panel/Reset Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Reset/Panel/Reset Button" to="." method="_on_button_pressed"]
