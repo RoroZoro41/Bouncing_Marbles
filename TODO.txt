@@ -1,5 +1,0 @@
-Add shader background
-
-add sound effect (marble sound) for ball clanging (and wall touching)
-
-teleport the balls to inside the window if they get pushed out
